@@ -7,19 +7,41 @@ package Vista;
 import Datos.Datos;
 import Modelo.Proveedores;
 import com.mycompany.mitienda.MiTienda;
+import java.awt.TextArea;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  *
  * @author HP
  */
 public class nuevoProveedor extends javax.swing.JFrame {
+    Proveedores provEdit;
+    boolean isEdit;
 
     /**
      * Creates new form nuevoProveedor
      */
-    public nuevoProveedor() {
+    public nuevoProveedor(boolean isEdit) {
+        this.isEdit=isEdit;
+        provEdit = new Proveedores();
         initComponents();
+        if(isEdit==true){
+            this.setTitle("Editar Proveedor");
+        }else{
+            this.setTitle("Nuevo Proveedor");
+        }
+    }
+    
+    public void llenarCamposParaModificar(Proveedores proveedor){
+        this.nombreProveedor.setText(proveedor.getNombre());
+        this.telProveedor.setText(proveedor.getTelefono()+"");
+        this.direccionProveedor.setText(proveedor.getDireccion());
+        this.ciudadProveedor.setText(proveedor.getCiudad());
+        this.apuntesProveedor.setText(proveedor.getApuntes());
+        this.emailProveedor.setText(proveedor.getEmail());
+        this.provEdit=proveedor;
+        
     }
 
     /**
@@ -269,8 +291,23 @@ public class nuevoProveedor extends javax.swing.JFrame {
                 prov.setEmail(emailProveedor.getText());
                 prov.setApuntes(apuntesProveedor.getText());
                 prov.setId(MiTienda.datosProveedores.size()+1);
-                dt.guardarNuevoProveedor(MiTienda.conexion, prov);
-                MiTienda.datosProveedores.add(prov);
+                if(this.isEdit==true){
+                    prov.setId(this.provEdit.getId());
+                    for (int i = 0; i < MiTienda.datosProveedores.size(); i++) {
+                        if(MiTienda.datosProveedores.get(i).getId()==prov.getId()){
+                            dt.actualizarProveedor(prov, MiTienda.conexion);
+                            MiTienda.datosProveedores.get(i).editar(prov);
+                            i=MiTienda.datosProveedores.size()+1;
+                            JOptionPane.showMessageDialog(this, "Se han modificado los campos");
+                            VentanaPrincipal.infoProveedorTxtArea.setText("Id: "+prov.getId()+"\nNombre: "+prov.getNombre()+"\nTelefono: "+prov.getTelefono()+"\nDireccion: "+prov.getDireccion() +"\nCiudad: "+
+                                prov.getCiudad() + "\nEmail: "+prov.getEmail() + "\n\nApuntes importantes: \n\""+prov.getApuntes()+"\"");
+                        }                        
+                    }
+                }else{
+                     dt.guardarNuevoProveedor(MiTienda.conexion, prov);
+                     MiTienda.datosProveedores.add(prov);
+                }       
+                
                 MiTienda.llenarTablaProveedores(MiTienda.datosProveedores);
                 this.dispose();
             } catch (NumberFormatException e) {

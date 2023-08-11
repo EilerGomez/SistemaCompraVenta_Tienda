@@ -72,4 +72,13 @@ public class Proveedores {
     public void setApuntes(String apuntes) {
         this.apuntes = apuntes;
     }
+    
+    public void editar(Proveedores prov){
+        this.nombre=prov.getNombre();
+        this.ciudad=prov.getCiudad();
+        this.direccion=prov.getDireccion();
+        this.telefono=prov.getTelefono();
+        this.email=prov.getEmail();
+        this.apuntes=prov.getApuntes();
+    }
 }

@@ -4,9 +4,13 @@
  */
 package Vista;
 
+import Datos.Datos;
 import Modelo.Proveedores;
 import com.mycompany.mitienda.MiTienda;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -52,7 +56,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         labelCatalogosProv = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         infoProveedorTxtArea = new javax.swing.JTextArea();
-        jButton3 = new javax.swing.JButton();
+        editarProveedorButton = new javax.swing.JButton();
+        eliminarProveedorButton = new javax.swing.JButton();
+        labelBuscar = new javax.swing.JLabel();
+        fieldBuscar = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -95,7 +102,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jDesktopPane4Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(nuevaVenta)
-                .addContainerGap(675, Short.MAX_VALUE))
+                .addContainerGap(693, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ventas", jDesktopPane4);
@@ -110,7 +117,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane3Layout.setVerticalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 739, Short.MAX_VALUE)
+            .addGap(0, 757, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Clientes", jDesktopPane3);
@@ -175,7 +182,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(agregarACatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +199,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane5Layout.setVerticalGroup(
             jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 739, Short.MAX_VALUE)
+            .addGap(0, 757, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Compras", jDesktopPane5);
@@ -235,7 +242,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jButton1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.foreground"));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Agregar proveedor");
+        jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -251,14 +258,45 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         infoProveedorTxtArea.setRows(5);
         jScrollPane3.setViewportView(infoProveedorTxtArea);
 
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Editar Proveedor");
+        editarProveedorButton.setForeground(new java.awt.Color(0, 0, 0));
+        editarProveedorButton.setText("Editar");
+        editarProveedorButton.setEnabled(false);
+        editarProveedorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarProveedorButtonActionPerformed(evt);
+            }
+        });
+
+        eliminarProveedorButton.setBackground(new java.awt.Color(255, 102, 102));
+        eliminarProveedorButton.setForeground(new java.awt.Color(255, 255, 255));
+        eliminarProveedorButton.setText("Eliminar");
+        eliminarProveedorButton.setEnabled(false);
+        eliminarProveedorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarProveedorButtonActionPerformed(evt);
+            }
+        });
+
+        labelBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        labelBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        labelBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        labelBuscar.setText("Buscar:");
+
+        fieldBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        fieldBuscar.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                fieldBuscarCaretUpdate(evt);
+            }
+        });
 
         jDesktopPane6.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane6.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane6.setLayer(labelCatalogosProv, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane6.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane6.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane6.setLayer(editarProveedorButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane6.setLayer(eliminarProveedorButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane6.setLayer(labelBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane6.setLayer(fieldBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane6Layout = new javax.swing.GroupLayout(jDesktopPane6);
         jDesktopPane6.setLayout(jDesktopPane6Layout);
@@ -268,17 +306,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(91, 91, 91)
                 .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(108, 108, 108))
-                    .addGroup(jDesktopPane6Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelCatalogosProv, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(94, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(94, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane6Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jDesktopPane6Layout.createSequentialGroup()
+                                .addComponent(labelCatalogosProv, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jDesktopPane6Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                                    .addComponent(editarProveedorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(eliminarProveedorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(108, 108, 108))))
         );
         jDesktopPane6Layout.setVerticalGroup(
             jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,14 +331,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelCatalogosProv))
+                        .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelCatalogosProv)
+                            .addComponent(labelBuscar)
+                            .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editarProveedorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarProveedorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,7 +421,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarACatalogoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       nuevoProveedor nv = new nuevoProveedor();
+       nuevoProveedor nv = new nuevoProveedor(false);
        nv.setVisible(true);
        nv.setResizable(false);
        nv.setEnabled(true);
@@ -383,7 +433,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaProveedoresKeyPressed
 
     private void mostrarEnAreaInfo(){
-         int filaSeleccionada = tablaProveedores.getSelectedRow();
+        this.editarProveedorButton.setEnabled(true);
+        this.eliminarProveedorButton.setEnabled(true);
+        int filaSeleccionada = tablaProveedores.getSelectedRow();
         String id1 = (String)tablaProveedores.getValueAt(filaSeleccionada, 0);
         int id = Integer.parseInt(id1);
         for (int i = 0; i < MiTienda.datosProveedores.size(); i++) {
@@ -402,6 +454,81 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // Lo imprimimos en pantalla
         //System.out.println(id);
     }//GEN-LAST:event_tablaProveedoresMouseClicked
+
+    private void editarProveedorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarProveedorButtonActionPerformed
+        // TODO add your handling code here:
+        int filaSeleccionada = tablaProveedores.getSelectedRow();
+        String id1 = (String)tablaProveedores.getValueAt(filaSeleccionada, 0);
+        int id = Integer.parseInt(id1);
+        for (int i = 0; i < MiTienda.datosProveedores.size(); i++) {
+            if(MiTienda.datosProveedores.get(i).getId()==id){
+                Proveedores p=MiTienda.datosProveedores.get(i);
+                nuevoProveedor np = new nuevoProveedor(true);
+                np.setVisible(true);
+                np.setLocationRelativeTo(null);
+                np.llenarCamposParaModificar(p);
+                np.setResizable(false);
+                np.setEnabled(true);
+                i=MiTienda.datosProveedores.size()+1;
+            }
+        }
+    }//GEN-LAST:event_editarProveedorButtonActionPerformed
+
+    private void eliminarProveedorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarProveedorButtonActionPerformed
+        // TODO add your handling code here:
+        String numeroUno="";
+        for (int i = 0; i < 5; i++) {
+            Random rn = new Random();
+            int answer = rn.nextInt(10) + 1;
+            numeroUno+=answer;
+        }
+        int filaSeleccionada = tablaProveedores.getSelectedRow();
+        String id1 = (String)tablaProveedores.getValueAt(filaSeleccionada, 0);
+        int id = Integer.parseInt(id1);
+        String number="";
+        Proveedores p= new  Proveedores();
+        for (int i = 0; i < MiTienda.datosProveedores.size(); i++) {
+            if(MiTienda.datosProveedores.get(i).getId()==id){
+                p=MiTienda.datosProveedores.get(i);
+                number = JOptionPane.showInputDialog("Tome en cuenta que se eliminaran todos los registros con este nombre!"
+                        + "\nPara eliminar el proveedor: "+p.getNombre()+"\n Ingrese el codigo: \n\t\t"+numeroUno);
+                i=MiTienda.datosProveedores.size()+1;
+            }
+        }
+       
+        if(number.equals(numeroUno)){
+            //eliminar
+            MiTienda.datosProveedores.remove(filaSeleccionada);
+            MiTienda.llenarTablaProveedores(MiTienda.datosProveedores);
+            Datos dt= new Datos();
+            dt.eliminarProveedor(p.getId(), MiTienda.conexion);
+            this.editarProveedorButton.setEnabled(false);
+            this.eliminarProveedorButton.setEnabled(false);
+            this.infoProveedorTxtArea.setText("");
+            JOptionPane.showMessageDialog(this, "Se ha eliminado el proveedor");
+        }else{
+            JOptionPane.showMessageDialog(this, "Ingrese el codigo correcto");
+        }
+        
+    }//GEN-LAST:event_eliminarProveedorButtonActionPerformed
+
+    private void fieldBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_fieldBuscarCaretUpdate
+        // TODO add your handling code here:
+        if(fieldBuscar.getText().equalsIgnoreCase(" ")){
+            MiTienda.llenarTablaProveedores(MiTienda.datosProveedores);
+        }else{
+            ArrayList<Proveedores> listaP = new ArrayList<>();
+            for (int i = 0; i < MiTienda.datosProveedores.size(); i++) {
+                boolean contiene= MiTienda.datosProveedores.get(i).getNombre().contains(fieldBuscar.getText());
+                if(contiene){
+                    listaP.add(MiTienda.datosProveedores.get(i));
+                }
+            }
+            MiTienda.llenarTablaProveedores(listaP);
+        }
+        //this.labelBuscar.setText(this.fieldBuscar.getText());
+        
+    }//GEN-LAST:event_fieldBuscarCaretUpdate
 /**/
     /**
     * @param args the command line arguments
@@ -440,10 +567,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarACatalogo;
-    private javax.swing.JTextArea infoProveedorTxtArea;
+    private javax.swing.JButton editarProveedorButton;
+    private javax.swing.JButton eliminarProveedorButton;
+    private javax.swing.JTextField fieldBuscar;
+    public static javax.swing.JTextArea infoProveedorTxtArea;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JDesktopPane jDesktopPane3;
@@ -462,6 +591,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel labelBuscar;
     private javax.swing.JLabel labelCatalogosProv;
     private javax.swing.JButton nuevaVenta;
     public javax.swing.JTable productosTabla;

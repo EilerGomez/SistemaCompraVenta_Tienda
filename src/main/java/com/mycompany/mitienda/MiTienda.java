@@ -66,17 +66,17 @@ public class MiTienda {
         String[] fila = new String[6];
         tabla.addColumn("Id");
         tabla.addColumn("Nombre");
-        tabla.addColumn("Telefono");
+        tabla.addColumn("Telefono");/*
         tabla.addColumn("Direccion");
         tabla.addColumn("Ciudad");
-        tabla.addColumn("Email");
+        tabla.addColumn("Email");*/
         for (int i = 0; i < proveedores.size(); i++) {            
             fila[0] = Integer.toString(proveedores.get(i).getId());
             fila[1]=proveedores.get(i).getNombre();
-            fila[2]=Integer.toString(proveedores.get(i).getTelefono());
+            fila[2]=Integer.toString(proveedores.get(i).getTelefono());/*
             fila[3]=proveedores.get(i).getDireccion();
             fila[4]=proveedores.get(i).getCiudad();
-            fila[5]=proveedores.get(i).getEmail();
+            fila[5]=proveedores.get(i).getEmail();*/
             tabla.addRow(fila);
         }
         ventana.tablaProveedores.setModel(tabla);
