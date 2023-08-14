@@ -5,6 +5,7 @@
 package Vista;
 
 import Datos.Datos;
+import Modelo.Productos;
 import Modelo.Proveedores;
 import com.mycompany.mitienda.MiTienda;
 import java.awt.Color;
@@ -24,6 +25,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+        this.busquedaPor.addItem("Nombre");
+        this.busquedaPor.addItem("Codigo");
     }
 
     /**
@@ -36,6 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem2 = new javax.swing.JMenuItem();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -48,6 +52,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         agregarACatalogo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        buscarProductosField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        busquedaPor = new javax.swing.JComboBox<>();
         jDesktopPane5 = new javax.swing.JDesktopPane();
         jDesktopPane6 = new javax.swing.JDesktopPane();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -60,6 +67,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         eliminarProveedorButton = new javax.swing.JButton();
         labelBuscar = new javax.swing.JLabel();
         fieldBuscar = new javax.swing.JTextField();
+        busquedaPor_Proveedores = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -102,7 +110,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jDesktopPane4Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(nuevaVenta)
-                .addContainerGap(693, Short.MAX_VALUE))
+                .addContainerGap(704, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ventas", jDesktopPane4);
@@ -117,7 +125,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane3Layout.setVerticalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
+            .addGap(0, 768, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Clientes", jDesktopPane3);
@@ -155,10 +163,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jButton2.setText("Buscar Productos");
 
+        buscarProductosField.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                buscarProductosFieldCaretUpdate(evt);
+            }
+        });
+        buscarProductosField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarProductosFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setBackground(new java.awt.Color(153, 153, 255));
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 51, 255));
+        jLabel2.setText("Buscar:");
+
+        busquedaPor.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
         jDesktopPane2.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(agregarACatalogo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(buscarProductosField, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(busquedaPor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
         jDesktopPane2.setLayout(jDesktopPane2Layout);
@@ -167,23 +196,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
                 .addContainerGap(95, Short.MAX_VALUE)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                        .addComponent(agregarACatalogo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(agregarACatalogo)
+                    .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane2Layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(busquedaPor, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(buscarProductosField, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(88, 88, 88))
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(agregarACatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agregarACatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                    .addComponent(jLabel1)
+                    .addComponent(buscarProductosField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(busquedaPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
@@ -199,7 +238,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane5Layout.setVerticalGroup(
             jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 757, Short.MAX_VALUE)
+            .addGap(0, 768, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Compras", jDesktopPane5);
@@ -288,6 +327,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 fieldBuscarCaretUpdate(evt);
             }
         });
+        fieldBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldBuscarActionPerformed(evt);
+            }
+        });
+
+        busquedaPor_Proveedores.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        busquedaPor_Proveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Id", "Telefono" }));
 
         jDesktopPane6.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane6.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -297,6 +344,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jDesktopPane6.setLayer(eliminarProveedorButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane6.setLayer(labelBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane6.setLayer(fieldBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane6.setLayer(busquedaPor_Proveedores, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane6Layout = new javax.swing.GroupLayout(jDesktopPane6);
         jDesktopPane6.setLayout(jDesktopPane6Layout);
@@ -304,26 +352,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane6Layout.createSequentialGroup()
                 .addGap(91, 91, 91)
-                .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(94, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane6Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jDesktopPane6Layout.createSequentialGroup()
-                                .addComponent(labelCatalogosProv, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jDesktopPane6Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                                    .addComponent(editarProveedorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(eliminarProveedorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(108, 108, 108))))
+                        .addComponent(labelCatalogosProv, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(busquedaPor_Proveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDesktopPane6Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                            .addComponent(editarProveedorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(eliminarProveedorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(108, 108, 108))
+                    .addGroup(jDesktopPane6Layout.createSequentialGroup()
+                        .addComponent(labelBuscar)
+                        .addGap(18, 18, 18)
+                        .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(96, 96, 96))))
+            .addGroup(jDesktopPane6Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jDesktopPane6Layout.setVerticalGroup(
             jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,12 +382,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelCatalogosProv)
                             .addComponent(labelBuscar)
-                            .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(busquedaPor_Proveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,7 +397,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(eliminarProveedorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -499,7 +550,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if(number.equals(numeroUno)){
             //eliminar
             MiTienda.datosProveedores.remove(filaSeleccionada);
-            MiTienda.llenarTablaProveedores(MiTienda.datosProveedores);
+            MiTienda.llenarTablaProveedores(MiTienda.datosProveedores,this.tablaProveedores);
             Datos dt= new Datos();
             dt.eliminarProveedor(p.getId(), MiTienda.conexion);
             this.editarProveedorButton.setEnabled(false);
@@ -515,20 +566,61 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void fieldBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_fieldBuscarCaretUpdate
         // TODO add your handling code here:
         if(fieldBuscar.getText().equalsIgnoreCase(" ")){
-            MiTienda.llenarTablaProveedores(MiTienda.datosProveedores);
+            MiTienda.llenarTablaProveedores(MiTienda.datosProveedores, this.tablaProveedores);
         }else{
             ArrayList<Proveedores> listaP = new ArrayList<>();
             for (int i = 0; i < MiTienda.datosProveedores.size(); i++) {
-                boolean contiene= MiTienda.datosProveedores.get(i).getNombre().contains(fieldBuscar.getText());
+                boolean contiene=false;
+                if(this.busquedaPor_Proveedores.getSelectedIndex()==0){
+                    contiene= MiTienda.datosProveedores.get(i).getNombre().contains(fieldBuscar.getText());
+                }else if(this.busquedaPor_Proveedores.getSelectedIndex()==1){
+                    String id=String.valueOf(MiTienda.datosProveedores.get(i).getId());
+                    contiene= id.contains(fieldBuscar.getText());
+                }else if(this.busquedaPor_Proveedores.getSelectedIndex()==2){
+                    String tel=String.valueOf(MiTienda.datosProveedores.get(i).getTelefono());
+                    contiene= tel.contains(fieldBuscar.getText());
+                }
+                
                 if(contiene){
                     listaP.add(MiTienda.datosProveedores.get(i));
                 }
             }
-            MiTienda.llenarTablaProveedores(listaP);
+            MiTienda.llenarTablaProveedores(listaP,this.tablaProveedores);
         }
         //this.labelBuscar.setText(this.fieldBuscar.getText());
         
     }//GEN-LAST:event_fieldBuscarCaretUpdate
+
+    private void buscarProductosFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProductosFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarProductosFieldActionPerformed
+
+    private void fieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldBuscarActionPerformed
+
+    private void buscarProductosFieldCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_buscarProductosFieldCaretUpdate
+        // TODO add your handling code here:
+        if(buscarProductosField.getText().equalsIgnoreCase(" ")){
+            MiTienda.LlenarTablaProductos(MiTienda.datosProductos);
+        }else{
+            ArrayList<Productos> listaProductos = new ArrayList<>();
+            for (int i = 0; i < MiTienda.datosProductos.size(); i++) {
+                boolean contiene=false;
+                if(this.busquedaPor.getSelectedIndex()==0){
+                    contiene= MiTienda.datosProductos.get(i).getNombre().contains(buscarProductosField.getText());
+                }else{
+                    String codigo = String.valueOf(MiTienda.datosProductos.get(i).getCodigo());
+                    contiene= codigo.contains(buscarProductosField.getText());
+                }
+                 
+                if(contiene){
+                    listaProductos.add(MiTienda.datosProductos.get(i));
+                }
+            }
+            MiTienda.LlenarTablaProductos(listaProductos);
+        }
+    }//GEN-LAST:event_buscarProductosFieldCaretUpdate
 /**/
     /**
     * @param args the command line arguments
@@ -567,6 +659,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarACatalogo;
+    private javax.swing.JTextField buscarProductosField;
+    private javax.swing.JComboBox<String> busquedaPor;
+    private javax.swing.JComboBox<String> busquedaPor_Proveedores;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton editarProveedorButton;
     private javax.swing.JButton eliminarProveedorButton;
     private javax.swing.JTextField fieldBuscar;
@@ -580,6 +676,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane5;
     private javax.swing.JDesktopPane jDesktopPane6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

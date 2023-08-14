@@ -10,6 +10,7 @@ import Modelo.Productos;
 import Modelo.Proveedores;
 import Vista.VentanaPrincipal;
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,12 +18,13 @@ import javax.swing.table.DefaultTableModel;
  * @author HP
  */
 public class MiTienda {
+    public static int ultimoRegistroProveedores;
     static ControladorProductos cp= new ControladorProductos();
     static ControladorProveedores cpv= new ControladorProveedores();
     public static Conexion conexion = new Conexion();
-    static VentanaPrincipal ventana;
+    public static VentanaPrincipal ventana;
     public static ArrayList<Proveedores> datosProveedores;
-
+    public static ArrayList<Productos> datosProductos;
     public static void main(String[] args) {
         MiTienda mt = new MiTienda();    
         
@@ -37,30 +39,32 @@ public class MiTienda {
         ventana.setResizable(false);
         conexion.conectar();
         datosProveedores=cpv.todosProveedores();
-        LlenarTablaProductos();
-        llenarTablaProveedores(datosProveedores);
+        datosProductos = cp.todosProductos();
+        ultimoRegistroProveedores=cpv.getUltimoRegistro();
+        LlenarTablaProductos(datosProductos);
+        llenarTablaProveedores(datosProveedores,ventana.tablaProveedores);
         
     }
     
-    public void LlenarTablaProductos(){
-        ArrayList<Productos> datos=cp.todosProductos();
+    public static void LlenarTablaProductos(ArrayList<Productos> productos){
+       
         DefaultTableModel tabla = new DefaultTableModel();
         String[] fila = new String[4];
         tabla.addColumn("Codigo");
         tabla.addColumn("Nombre");
         tabla.addColumn("Precio");
         tabla.addColumn("Cantidad");
-        for (int i = 0; i < datos.size(); i++) {            
-            fila[0] = Integer.toString(datos.get(i).getCodigo());
-            fila[1]=datos.get(i).getNombre();
-            fila[2]="Q.  "+Double.toString(datos.get(i).getPrecio());
-            fila[3]=Integer.toString(datos.get(i).getCantidad());
+        for (int i = 0; i < productos.size(); i++) {            
+            fila[0] = Integer.toString(productos.get(i).getCodigo());
+            fila[1]=productos.get(i).getNombre();
+            fila[2]="Q.  "+Double.toString(productos.get(i).getPrecio());
+            fila[3]=Integer.toString(productos.get(i).getCantidad());
             tabla.addRow(fila);
         }
         ventana.productosTabla.setModel(tabla);
     }
     
-    public static void llenarTablaProveedores(ArrayList<Proveedores> proveedores){
+    public static void llenarTablaProveedores(ArrayList<Proveedores> proveedores,JTable tablaP){
         
         DefaultTableModel tabla = new DefaultTableModel();
         String[] fila = new String[6];
@@ -79,7 +83,7 @@ public class MiTienda {
             fila[5]=proveedores.get(i).getEmail();*/
             tabla.addRow(fila);
         }
-        ventana.tablaProveedores.setModel(tabla);
+        tablaP.setModel(tabla);
         
     }
     

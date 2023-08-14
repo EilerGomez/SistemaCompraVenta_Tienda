@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class ControladorProveedores {
     Datos datos = new Datos();
-    
+    int ultimoRegistro=0;
      
     public ArrayList<Proveedores> todosProveedores(){
         ArrayList<Proveedores> proveedores = new ArrayList<>();
@@ -34,12 +34,21 @@ public class ControladorProveedores {
                 proveedor.setEmail(MiTienda.conexion.getResultado().getString(6));
                 proveedor.setApuntes(MiTienda.conexion.getResultado().getString(7));
                 proveedores.add(proveedor);
+                ultimoRegistro=proveedor.getId();
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControladorProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return proveedores;
+    }
+
+    public int getUltimoRegistro() {
+        return ultimoRegistro;
+    }
+
+    public void setUltimoRegistro(int ultimoRegistro) {
+        this.ultimoRegistro = ultimoRegistro;
     }
     
 }

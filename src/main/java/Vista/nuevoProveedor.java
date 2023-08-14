@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
  * @author HP
  */
 public class nuevoProveedor extends javax.swing.JFrame {
+
     Proveedores provEdit;
     boolean isEdit;
 
@@ -23,25 +24,25 @@ public class nuevoProveedor extends javax.swing.JFrame {
      * Creates new form nuevoProveedor
      */
     public nuevoProveedor(boolean isEdit) {
-        this.isEdit=isEdit;
+        this.isEdit = isEdit;
         provEdit = new Proveedores();
         initComponents();
-        if(isEdit==true){
+        if (isEdit == true) {
             this.setTitle("Editar Proveedor");
-        }else{
+        } else {
             this.setTitle("Nuevo Proveedor");
         }
     }
-    
-    public void llenarCamposParaModificar(Proveedores proveedor){
+
+    public void llenarCamposParaModificar(Proveedores proveedor) {
         this.nombreProveedor.setText(proveedor.getNombre());
-        this.telProveedor.setText(proveedor.getTelefono()+"");
+        this.telProveedor.setText(proveedor.getTelefono() + "");
         this.direccionProveedor.setText(proveedor.getDireccion());
         this.ciudadProveedor.setText(proveedor.getCiudad());
         this.apuntesProveedor.setText(proveedor.getApuntes());
         this.emailProveedor.setText(proveedor.getEmail());
-        this.provEdit=proveedor;
-        
+        this.provEdit = proveedor;
+
     }
 
     /**
@@ -290,25 +291,27 @@ public class nuevoProveedor extends javax.swing.JFrame {
                 prov.setCiudad(ciudadProveedor.getText());
                 prov.setEmail(emailProveedor.getText());
                 prov.setApuntes(apuntesProveedor.getText());
-                prov.setId(MiTienda.datosProveedores.size()+1);
-                if(this.isEdit==true){
+                prov.setId(MiTienda.datosProveedores.size() + 1);
+                if (this.isEdit == true) {
                     prov.setId(this.provEdit.getId());
                     for (int i = 0; i < MiTienda.datosProveedores.size(); i++) {
-                        if(MiTienda.datosProveedores.get(i).getId()==prov.getId()){
+                        if (MiTienda.datosProveedores.get(i).getId() == prov.getId()) {
                             dt.actualizarProveedor(prov, MiTienda.conexion);
                             MiTienda.datosProveedores.get(i).editar(prov);
-                            i=MiTienda.datosProveedores.size()+1;
+                            i = MiTienda.datosProveedores.size() + 1;
                             JOptionPane.showMessageDialog(this, "Se han modificado los campos");
-                            VentanaPrincipal.infoProveedorTxtArea.setText("Id: "+prov.getId()+"\nNombre: "+prov.getNombre()+"\nTelefono: "+prov.getTelefono()+"\nDireccion: "+prov.getDireccion() +"\nCiudad: "+
-                                prov.getCiudad() + "\nEmail: "+prov.getEmail() + "\n\nApuntes importantes: \n\""+prov.getApuntes()+"\"");
-                        }                        
+                            VentanaPrincipal.infoProveedorTxtArea.setText("Id: " + prov.getId() + "\nNombre: " + prov.getNombre() + "\nTelefono: " + prov.getTelefono() + "\nDireccion: " + prov.getDireccion() + "\nCiudad: "
+                                    + prov.getCiudad() + "\nEmail: " + prov.getEmail() + "\n\nApuntes importantes: \n\"" + prov.getApuntes() + "\"");
+                        }
                     }
-                }else{
-                     dt.guardarNuevoProveedor(MiTienda.conexion, prov);
-                     MiTienda.datosProveedores.add(prov);
-                }       
-                
-                MiTienda.llenarTablaProveedores(MiTienda.datosProveedores);
+                } else {
+                    dt.guardarNuevoProveedor(MiTienda.conexion, prov);
+                    prov.setId(MiTienda.ultimoRegistroProveedores+1);
+                    MiTienda.ultimoRegistroProveedores=prov.getId();
+                    MiTienda.datosProveedores.add(prov);
+                }
+
+                MiTienda.llenarTablaProveedores(MiTienda.datosProveedores, MiTienda.ventana.tablaProveedores);
                 this.dispose();
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "La casilla de Numero no es formato valido");
