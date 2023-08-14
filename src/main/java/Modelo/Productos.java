@@ -9,16 +9,26 @@ package Modelo;
  * @author HP
  */
 public class Productos {
-    int codigo;
+    String codigo;
+
+    public Productos(String codigo, String nombre, double precio, int cantidad) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+    public Productos(){
+        
+    }
     String nombre;
     double precio;
     int cantidad;
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

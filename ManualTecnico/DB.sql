@@ -24,12 +24,11 @@ ON DELETE CASCADE
 );
 
 CREATE TABLE productos(
-id INT NOT NULL AUTO_INCREMENT,
-codigo INT NOT NULL,
-nombre VARCHAR(40) NOT NULL,
-precio BOOLEAN NOT NULL,
+codigo VARCHAR(20) NOT NULL,
+nombre VARCHAR(150) NOT NULL,
+precio DOUBLE NOT NULL,
 cantidad INT NOT NULL,
-PRIMARY KEY(id,codigo)
+PRIMARY KEY(codigo)
 );
 
 CREATE TABLE proveedores(
@@ -45,12 +44,12 @@ PRIMARY KEY(id,telefono)
 
 CREATE TABLE prod_proveedor(
 id INT NOT NULL AUTO_INCREMENT,
-id_producto INT NOT NULL,
+c_producto VARCHAR(20) NOT NULL,
 id_proveedor INT NOT NULL,
 PRIMARY KEY(id),
-CONSTRAINT id_producto_proveedor_fk
-FOREIGN KEY (id_producto)
-REFERENCES productos(id)
+CONSTRAINT c_producto_proveedor_fk
+FOREIGN KEY (c_producto)
+REFERENCES productos(codigo)
 ON UPDATE CASCADE
 ON DELETE CASCADE,
 CONSTRAINT id_proveedor_producto_fk
@@ -63,7 +62,7 @@ ON DELETE CASCADE
 CREATE TABLE ventas(
 id INT NOT NULL AUTO_INCREMENT,
 id_factura INT NOT NULL,
-codigo_producto INT NOT NULL,
+codigo_producto VARCHAR(20) NOT NULL,
 cantidad INT NOT NULL,
 subtotal DOUBLE,
 PRIMARY KEY(id),
@@ -74,7 +73,7 @@ ON UPDATE CASCADE
 ON DELETE CASCADE,
 CONSTRAINT codigo_producto_venta_fk
 FOREIGN KEY (codigo_producto)
-REFERENCES productos(id)
+REFERENCES productos(codigo)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 );

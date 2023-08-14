@@ -6,6 +6,7 @@ package Controlador;
 
 import Conexion.Conexion;
 import Datos.Datos;
+import Datos.DatosProductos;
 import Modelo.Productos;
 import com.mycompany.mitienda.MiTienda;
 import java.awt.List;
@@ -19,17 +20,17 @@ import java.util.logging.Logger;
  * @author HP
  */
 public class ControladorProductos {
-    Datos datos = new Datos();
+    DatosProductos datos = new DatosProductos();
     public ArrayList<Productos> todosProductos(){
         ArrayList<Productos> productos = new ArrayList<>();
         datos.traerProductos(MiTienda.conexion);
         try {
             while(MiTienda.conexion.getResultado().next()){
                 Productos producto = new Productos();
-                producto.setCodigo(MiTienda.conexion.getResultado().getInt(2));
-                producto.setNombre(MiTienda.conexion.getResultado().getString(3));
-                producto.setPrecio(MiTienda.conexion.getResultado().getDouble(4));
-                producto.setCantidad(MiTienda.conexion.getResultado().getInt(5));
+                producto.setCodigo(MiTienda.conexion.getResultado().getString(1));
+                producto.setNombre(MiTienda.conexion.getResultado().getString(2));
+                producto.setPrecio(MiTienda.conexion.getResultado().getDouble(3));
+                producto.setCantidad(MiTienda.conexion.getResultado().getInt(4));
                 System.out.println(producto.toString());
                 productos.add(producto);
             }
@@ -39,4 +40,14 @@ public class ControladorProductos {
         return productos;
         
     }
+    
+    public void guardarNuevoProducto(String codigo, String nombre, double precioventa, int cantidad){
+        Productos nuevoProducto = new Productos(codigo,nombre,precioventa,cantidad);
+        datos.guardarNuevoProducto(MiTienda.conexion, nuevoProducto);
+        MiTienda.datosProductos.add(nuevoProducto);
+        MiTienda.LlenarTablaProductos(MiTienda.datosProductos);
+        
+    }
+    
+    
 }

@@ -4,9 +4,12 @@
  */
 package Vista;
 
+import Controlador.ControladorProductos;
+import Controlador.ControladorProductos_Proveedores;
 import Modelo.Proveedores;
 import com.mycompany.mitienda.MiTienda;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +23,7 @@ public class nuevoCatalogo extends javax.swing.JFrame {
     public nuevoCatalogo() {
         initComponents();
         MiTienda.llenarTablaProveedores(MiTienda.datosProveedores, tablaProveedores);
-        
+
         this.nombreProvSeleccionado.setText("Seleccione(*)");
     }
 
@@ -36,14 +39,14 @@ public class nuevoCatalogo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        codigoProducto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nombreProducto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        precioVentaProducto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
+        cantidadProducto = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         guardarProducto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -70,27 +73,27 @@ public class nuevoCatalogo extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel1.setText("Ingrese el codigo del poducto:");
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        codigoProducto.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        codigoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                codigoProductoActionPerformed(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Ingrese el nombre del producto:");
 
-        jTextField2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        nombreProducto.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        nombreProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                nombreProductoActionPerformed(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Ingrese el precio de VENTA  del producto:");
 
-        jTextField5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        precioVentaProducto.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setText("Ingrese la cantidad existente del producto:");
@@ -104,7 +107,7 @@ public class nuevoCatalogo extends javax.swing.JFrame {
             }
         });
 
-        jTextField4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        cantidadProducto.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -112,10 +115,10 @@ public class nuevoCatalogo extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(codigoProducto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nombreProducto)
+                    .addComponent(precioVentaProducto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cantidadProducto, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,19 +139,19 @@ public class nuevoCatalogo extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(codigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(precioVentaProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cantidadProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -161,6 +164,11 @@ public class nuevoCatalogo extends javax.swing.JFrame {
         guardarProducto.setForeground(new java.awt.Color(255, 255, 255));
         guardarProducto.setText("Guardar");
         guardarProducto.setEnabled(false);
+        guardarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarProductoActionPerformed(evt);
+            }
+        });
 
         tablaProveedores.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         tablaProveedores.setModel(new javax.swing.table.DefaultTableModel(
@@ -300,13 +308,13 @@ public class nuevoCatalogo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void codigoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_codigoProductoActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void nombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_nombreProductoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -319,45 +327,91 @@ public class nuevoCatalogo extends javax.swing.JFrame {
 
     private void tablaProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProveedoresMouseClicked
         // TODO add your handling code here:
-        int filaSeleccionada = tablaProveedores.getSelectedRow();        
-        String id1 = (String)tablaProveedores.getValueAt(filaSeleccionada, 0);
+        int filaSeleccionada = tablaProveedores.getSelectedRow();
+        String id1 = (String) tablaProveedores.getValueAt(filaSeleccionada, 0);
         this.guardarProducto.setEnabled(true);
         for (int i = 0; i <= MiTienda.datosProveedores.size(); i++) {
-           if(id1.equals(String.valueOf(MiTienda.datosProveedores.get(i).getId()))){
-               this.nombreProvSeleccionado.setText(MiTienda.datosProveedores.get(i).getId()+": "+MiTienda.datosProveedores.get(i).getNombre());
-               i=MiTienda.datosProveedores.size()+1;
-           }
-            
+            if (id1.equals(String.valueOf(MiTienda.datosProveedores.get(i).getId()))) {
+                this.nombreProvSeleccionado.setText(MiTienda.datosProveedores.get(i).getId() + ": " + MiTienda.datosProveedores.get(i).getNombre());
+                i = MiTienda.datosProveedores.size() + 1;
+            }
+
         }
     }//GEN-LAST:event_tablaProveedoresMouseClicked
 
     private void fieldBuscarProvCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_fieldBuscarProvCaretUpdate
         // TODO add your handling code here:
-        
-        if(fieldBuscarProv.getText().equalsIgnoreCase(" ")){
+
+        if (fieldBuscarProv.getText().equalsIgnoreCase(" ")) {
             MiTienda.llenarTablaProveedores(MiTienda.datosProveedores, this.tablaProveedores);
-        }else{
+        } else {
             ArrayList<Proveedores> listaP = new ArrayList<>();
             for (int i = 0; i < MiTienda.datosProveedores.size(); i++) {
-                boolean contiene=false;
-                if(this.busquedaPor_Proveedores.getSelectedIndex()==0){
-                    contiene= MiTienda.datosProveedores.get(i).getNombre().contains(fieldBuscarProv.getText());
-                }else if(this.busquedaPor_Proveedores.getSelectedIndex()==1){
-                    String id=String.valueOf(MiTienda.datosProveedores.get(i).getId());
-                    contiene= id.contains(fieldBuscarProv.getText());
-                }else if(this.busquedaPor_Proveedores.getSelectedIndex()==2){
-                    String tel=String.valueOf(MiTienda.datosProveedores.get(i).getTelefono());
-                    contiene= tel.contains(fieldBuscarProv.getText());
+                boolean contiene = false;
+                if (this.busquedaPor_Proveedores.getSelectedIndex() == 0) {
+                    contiene = MiTienda.datosProveedores.get(i).getNombre().contains(fieldBuscarProv.getText());
+                } else if (this.busquedaPor_Proveedores.getSelectedIndex() == 1) {
+                    String id = String.valueOf(MiTienda.datosProveedores.get(i).getId());
+                    contiene = id.contains(fieldBuscarProv.getText());
+                } else if (this.busquedaPor_Proveedores.getSelectedIndex() == 2) {
+                    String tel = String.valueOf(MiTienda.datosProveedores.get(i).getTelefono());
+                    contiene = tel.contains(fieldBuscarProv.getText());
                 }
-                
-                if(contiene){
+
+                if (contiene) {
                     listaP.add(MiTienda.datosProveedores.get(i));
                 }
             }
-            MiTienda.llenarTablaProveedores(listaP,this.tablaProveedores);
-            
+            MiTienda.llenarTablaProveedores(listaP, this.tablaProveedores);
+
         }
     }//GEN-LAST:event_fieldBuscarProvCaretUpdate
+
+    public void guardarNuevoProducto() {
+        ControladorProductos controlador = new ControladorProductos();
+        String codigoProducto = "";
+        int cantidaProducto = 0;
+        double precio = 0;
+        String nombre = this.nombreProducto.getText();
+        try {
+            codigoProducto = (this.codigoProducto.getText());
+            cantidaProducto = Integer.parseInt(this.cantidadProducto.getText());
+            precio = Double.parseDouble(this.precioVentaProducto.getText());
+            controlador.guardarNuevoProducto(codigoProducto, nombre, precio, cantidaProducto);
+            JOptionPane.showMessageDialog(null, "Se ha guardado un nuevo producto al catalogo");
+            this.dispose();
+        } catch (Exception e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(null, "Error de formato de numero verifique que el codigo, cantidad y precio sean numeros");
+        }
+    }
+
+    public void guardarProducto_Proveedor() {
+        ControladorProductos_Proveedores controlador = new ControladorProductos_Proveedores();
+        String codigoProducto = "";
+        int codigoProveedor = 0;
+        try {
+            codigoProducto = (this.codigoProducto.getText());
+            codigoProveedor = Integer.parseInt((String) tablaProveedores.getValueAt(tablaProveedores.getSelectedRow(), 0));
+            System.out.println("Nuevo prod_prov: " + codigoProducto + ", " + codigoProveedor);
+            controlador.guardarProducto_Proveedor(codigoProducto, codigoProveedor);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error de formato de numero verifique que el codigo del producto sea un numero");
+        }
+    }
+    private void guardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarProductoActionPerformed
+        // TODO add your handling code here:
+
+        if (this.codigoProducto.getText().equalsIgnoreCase(" ") || this.nombreProducto.getText().equalsIgnoreCase(" ") || this.precioVentaProducto.getText().equalsIgnoreCase(" ")
+                || this.cantidadProducto.getText().equalsIgnoreCase(" ")) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+
+        } else {
+            guardarNuevoProducto();
+            guardarProducto_Proveedor();
+        }
+
+    }//GEN-LAST:event_guardarProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -396,6 +450,8 @@ public class nuevoCatalogo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> busquedaPor_Proveedores;
+    private javax.swing.JTextField cantidadProducto;
+    private javax.swing.JTextField codigoProducto;
     private javax.swing.JTextField fieldBuscarProv;
     private javax.swing.JButton guardarProducto;
     private javax.swing.JButton jButton2;
@@ -410,11 +466,9 @@ public class nuevoCatalogo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField nombreProducto;
     private javax.swing.JLabel nombreProvSeleccionado;
+    private javax.swing.JTextField precioVentaProducto;
     private javax.swing.JTable tablaProveedores;
     // End of variables declaration//GEN-END:variables
 }

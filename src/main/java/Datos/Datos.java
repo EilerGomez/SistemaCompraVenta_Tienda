@@ -16,16 +16,7 @@ import java.util.logging.Logger;
  * @author HP
  */
 public class Datos {
-    public void traerProductos(Conexion conexion) {
-        String query = "select * from productos;";
-        try {
-            PreparedStatement stmt = conexion.getConnection().prepareStatement(query);
-            conexion.setResultSet(stmt.executeQuery());
-            System.out.println("hecho");
-        } catch (SQLException e) {
-            System.out.println("Error al consultar las consultas:" + e);
-        }
-    }
+    
     
     public void traerProveedores(Conexion conexion){
         String query = "select * from proveedores;";

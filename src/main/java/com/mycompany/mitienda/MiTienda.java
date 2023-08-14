@@ -5,7 +5,9 @@ package com.mycompany.mitienda;
 
 import Conexion.Conexion;
 import Controlador.ControladorProductos;
+import Controlador.ControladorProductos_Proveedores;
 import Controlador.ControladorProveedores;
+import Controlador.Productos_Proveedor;
 import Modelo.Productos;
 import Modelo.Proveedores;
 import Vista.VentanaPrincipal;
@@ -21,10 +23,12 @@ public class MiTienda {
     public static int ultimoRegistroProveedores;
     static ControladorProductos cp= new ControladorProductos();
     static ControladorProveedores cpv= new ControladorProveedores();
+    static ControladorProductos_Proveedores cpp=new ControladorProductos_Proveedores();
     public static Conexion conexion = new Conexion();
     public static VentanaPrincipal ventana;
     public static ArrayList<Proveedores> datosProveedores;
     public static ArrayList<Productos> datosProductos;
+    public static ArrayList<Productos_Proveedor> datosProd_Proveedores;
     public static void main(String[] args) {
         MiTienda mt = new MiTienda();    
         
@@ -40,6 +44,8 @@ public class MiTienda {
         conexion.conectar();
         datosProveedores=cpv.todosProveedores();
         datosProductos = cp.todosProductos();
+        datosProd_Proveedores=cpp.traerTodos();
+        
         ultimoRegistroProveedores=cpv.getUltimoRegistro();
         LlenarTablaProductos(datosProductos);
         llenarTablaProveedores(datosProveedores,ventana.tablaProveedores);
@@ -55,7 +61,7 @@ public class MiTienda {
         tabla.addColumn("Precio");
         tabla.addColumn("Cantidad");
         for (int i = 0; i < productos.size(); i++) {            
-            fila[0] = Integer.toString(productos.get(i).getCodigo());
+            fila[0] = (productos.get(i).getCodigo());
             fila[1]=productos.get(i).getNombre();
             fila[2]="Q.  "+Double.toString(productos.get(i).getPrecio());
             fila[3]=Integer.toString(productos.get(i).getCantidad());
