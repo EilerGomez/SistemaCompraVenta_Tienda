@@ -11,8 +11,11 @@ import Controlador.Productos_Proveedor;
 import Modelo.Productos;
 import Modelo.Proveedores;
 import Vista.VentanaPrincipal;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,18 +32,33 @@ public class MiTienda {
     public static ArrayList<Proveedores> datosProveedores;
     public static ArrayList<Productos> datosProductos;
     public static ArrayList<Productos_Proveedor> datosProd_Proveedores;
+    
+    
     public static void main(String[] args) {
+    try {
+        UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");       // Nimbus (moderno)
+       //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());         // Sistema operativo (Windows, Linux, etc.)
+        //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); 
+      //UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel"); // Viejo estilo UNIX
+
+      
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
         MiTienda mt = new MiTienda();    
         
-
     }
     
     public MiTienda(){
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+
         ventana = new VentanaPrincipal();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(null);
         ventana.setEnabled(true);
-        ventana.setResizable(false);
+        ventana.setResizable(true);
+        ventana.setSize(pantalla);
+        ventana.pack();
         conexion.conectar();
         datosProveedores=cpv.todosProveedores();
         datosProductos = cp.todosProductos();

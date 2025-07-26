@@ -8,8 +8,13 @@ import Datos.Datos;
 import Modelo.Proveedores;
 import com.mycompany.mitienda.MiTienda;
 import java.awt.TextArea;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 
 /**
  *
@@ -32,6 +37,8 @@ public class nuevoProveedor extends javax.swing.JFrame {
         } else {
             this.setTitle("Nuevo Proveedor");
         }
+        
+        configurarAtajosTeclado();
     }
 
     public void llenarCamposParaModificar(Proveedores proveedor) {
@@ -43,6 +50,32 @@ public class nuevoProveedor extends javax.swing.JFrame {
         this.emailProveedor.setText(proveedor.getEmail());
         this.provEdit = proveedor;
 
+    }
+    
+       
+    public void configurarAtajosTeclado() {
+        // Objeto raíz donde capturarás teclas
+        JRootPane rootPane = this.getRootPane();
+
+       getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        .put(KeyStroke.getKeyStroke("control ENTER"), "accionCtrlEnter");
+
+        getRootPane().getActionMap().put("accionCtrlEnter", new AbstractAction() {
+        @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                guardarProveedor(); // tu método
+            }
+        });
+
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+        .put(KeyStroke.getKeyStroke("ESCAPE"), "salir");
+
+        getRootPane().getActionMap().put("salir", new AbstractAction() {
+        @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+              nuevoProveedor.this.dispose();
+            }
+        });
     }
 
     /**
@@ -128,7 +161,7 @@ public class nuevoProveedor extends javax.swing.JFrame {
         jScrollPane1.setViewportView(apuntesProveedor);
 
         jButton1.setBackground(new java.awt.Color(255, 102, 102));
-        jButton1.setText("Cancelar");
+        jButton1.setText("Cancelar   ESC");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -137,7 +170,7 @@ public class nuevoProveedor extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(102, 153, 255));
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Guardar");
+        jButton2.setText("Guardar   Ctl+ENTER");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -279,7 +312,12 @@ public class nuevoProveedor extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (nombreProveedor.getText().equalsIgnoreCase("") || telProveedor.getText().equalsIgnoreCase("")) {
+       guardarProveedor();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void guardarProveedor(){
+         if (nombreProveedor.getText().equalsIgnoreCase("") || telProveedor.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this, "Por favor llene las casillas Nombre y Telefono como minimo");
         } else {
             Proveedores prov = new Proveedores();
@@ -309,6 +347,7 @@ public class nuevoProveedor extends javax.swing.JFrame {
                     prov.setId(MiTienda.ultimoRegistroProveedores+1);
                     MiTienda.ultimoRegistroProveedores=prov.getId();
                     MiTienda.datosProveedores.add(prov);
+                    JOptionPane.showMessageDialog(this, "Se ha guardado un nuevo Proveedor");
                 }
 
                 MiTienda.llenarTablaProveedores(MiTienda.datosProveedores, MiTienda.ventana.tablaProveedores);
@@ -317,9 +356,7 @@ public class nuevoProveedor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "La casilla de Numero no es formato valido");
             }
         }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */

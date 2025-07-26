@@ -11,7 +11,13 @@ import com.mycompany.mitienda.MiTienda;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JRootPane;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +33,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
         this.busquedaPor.addItem("Nombre");
         this.busquedaPor.addItem("Codigo");
+        configurarAtajosTeclado();
     }
 
     /**
@@ -45,6 +52,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jDesktopPane4 = new javax.swing.JDesktopPane();
         nuevaVenta = new javax.swing.JButton();
+        jDesktopPane5 = new javax.swing.JDesktopPane();
         jDesktopPane3 = new javax.swing.JDesktopPane();
         jDesktopPane2 = new javax.swing.JDesktopPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -55,7 +63,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         buscarProductosField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         busquedaPor = new javax.swing.JComboBox<>();
-        jDesktopPane5 = new javax.swing.JDesktopPane();
         jDesktopPane6 = new javax.swing.JDesktopPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaProveedores = new javax.swing.JTable();
@@ -103,17 +110,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jDesktopPane4Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(nuevaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(898, Short.MAX_VALUE))
+                .addContainerGap(886, Short.MAX_VALUE))
         );
         jDesktopPane4Layout.setVerticalGroup(
             jDesktopPane4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane4Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(nuevaVenta)
-                .addContainerGap(704, Short.MAX_VALUE))
+                .addContainerGap(884, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ventas", jDesktopPane4);
+
+        javax.swing.GroupLayout jDesktopPane5Layout = new javax.swing.GroupLayout(jDesktopPane5);
+        jDesktopPane5.setLayout(jDesktopPane5Layout);
+        jDesktopPane5Layout.setHorizontalGroup(
+            jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1103, Short.MAX_VALUE)
+        );
+        jDesktopPane5Layout.setVerticalGroup(
+            jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 948, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Compras", jDesktopPane5);
 
         jDesktopPane3.setBackground(java.awt.SystemColor.activeCaption);
 
@@ -121,11 +141,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jDesktopPane3.setLayout(jDesktopPane3Layout);
         jDesktopPane3Layout.setHorizontalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1115, Short.MAX_VALUE)
+            .addGap(0, 1103, Short.MAX_VALUE)
         );
         jDesktopPane3Layout.setVerticalGroup(
             jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
+            .addGap(0, 948, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Clientes", jDesktopPane3);
@@ -149,7 +169,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(51, 153, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 0, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Catalogo general");
 
         agregarACatalogo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -176,7 +196,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(153, 153, 255));
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(153, 51, 255));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Buscar:");
 
         busquedaPor.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -194,30 +214,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
-                .addContainerGap(95, Short.MAX_VALUE)
+                .addGap(95, 95, 95)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(agregarACatalogo)
-                    .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane2Layout.createSequentialGroup()
                             .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(busquedaPor, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(229, 229, 229)
+                            .addComponent(busquedaPor, 0, 159, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buscarProductosField, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(buscarProductosField, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)))
                 .addGap(88, 88, 88))
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(99, Short.MAX_VALUE)
                 .addComponent(agregarACatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
                 .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(buscarProductosField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,21 +250,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Productos", jDesktopPane2);
 
-        javax.swing.GroupLayout jDesktopPane5Layout = new javax.swing.GroupLayout(jDesktopPane5);
-        jDesktopPane5.setLayout(jDesktopPane5Layout);
-        jDesktopPane5Layout.setHorizontalGroup(
-            jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1115, Short.MAX_VALUE)
-        );
-        jDesktopPane5Layout.setVerticalGroup(
-            jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
-        );
+        jDesktopPane6.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTabbedPane1.addTab("Compras", jDesktopPane5);
-
-        jDesktopPane6.setBackground(java.awt.SystemColor.activeCaption);
-
+        tablaProveedores.setAutoCreateRowSorter(true);
         tablaProveedores.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         tablaProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -281,15 +289,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jButton1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.foreground"));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Agregar");
+        jButton1.setText("Agregar         F1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        labelCatalogosProv.setBackground(new java.awt.Color(0, 0, 0));
         labelCatalogosProv.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        labelCatalogosProv.setForeground(new java.awt.Color(0, 0, 0));
+        labelCatalogosProv.setForeground(new java.awt.Color(255, 255, 255));
         labelCatalogosProv.setText("Catalogo de Proveedores");
 
         infoProveedorTxtArea.setColumns(20);
@@ -298,7 +307,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane3.setViewportView(infoProveedorTxtArea);
 
         editarProveedorButton.setForeground(new java.awt.Color(0, 0, 0));
-        editarProveedorButton.setText("Editar");
+        editarProveedorButton.setText("Editar        Ctl + E");
         editarProveedorButton.setEnabled(false);
         editarProveedorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -308,7 +317,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         eliminarProveedorButton.setBackground(new java.awt.Color(255, 102, 102));
         eliminarProveedorButton.setForeground(new java.awt.Color(255, 255, 255));
-        eliminarProveedorButton.setText("Eliminar");
+        eliminarProveedorButton.setText("Eliminar ");
         eliminarProveedorButton.setEnabled(false);
         eliminarProveedorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,7 +327,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         labelBuscar.setBackground(new java.awt.Color(255, 255, 255));
         labelBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        labelBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        labelBuscar.setForeground(new java.awt.Color(255, 255, 255));
         labelBuscar.setText("Buscar:");
 
         fieldBuscar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -352,13 +361,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane6Layout.createSequentialGroup()
                 .addGap(91, 91, 91)
-                .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
                         .addComponent(labelCatalogosProv, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(busquedaPor_Proveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(135, 135, 135)
+                        .addComponent(busquedaPor_Proveedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
                 .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
                         .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -369,12 +378,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
                         .addComponent(labelBuscar)
                         .addGap(18, 18, 18)
-                        .addComponent(fieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fieldBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
                         .addGap(96, 96, 96))))
             .addGroup(jDesktopPane6Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScrollPane2)
+                .addGap(88, 88, 88))
         );
         jDesktopPane6Layout.setVerticalGroup(
             jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +391,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jDesktopPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelCatalogosProv)
@@ -394,10 +403,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
                         .addComponent(editarProveedorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(28, 28, 28)
                         .addComponent(eliminarProveedorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
 
@@ -409,11 +419,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 977, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -451,8 +466,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -472,15 +487,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarACatalogoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      agregarProveedor();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void agregarProveedor(){
        nuevoProveedor nv = new nuevoProveedor(false);
        nv.setVisible(true);
        nv.setResizable(false);
        nv.setEnabled(true);
        nv.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
     private void tablaProveedoresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaProveedoresKeyPressed
-          mostrarEnAreaInfo();
+          //mostrarEnAreaInfo();
     }//GEN-LAST:event_tablaProveedoresKeyPressed
 
     private void mostrarEnAreaInfo(){
@@ -508,6 +526,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void editarProveedorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarProveedorButtonActionPerformed
         // TODO add your handling code here:
+        editarProveedor();
+    }//GEN-LAST:event_editarProveedorButtonActionPerformed
+    public void editarProveedor(){
         int filaSeleccionada = tablaProveedores.getSelectedRow();
         String id1 = (String)tablaProveedores.getValueAt(filaSeleccionada, 0);
         int id = Integer.parseInt(id1);
@@ -523,11 +544,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 i=MiTienda.datosProveedores.size()+1;
             }
         }
-    }//GEN-LAST:event_editarProveedorButtonActionPerformed
-
+    }
     private void eliminarProveedorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarProveedorButtonActionPerformed
         // TODO add your handling code here:
-        String numeroUno="";
+       eliminarProveedor();
+    }//GEN-LAST:event_eliminarProveedorButtonActionPerformed
+    
+    public void eliminarProveedor(){
+         String numeroUno="";
         for (int i = 0; i < 5; i++) {
             Random rn = new Random();
             int answer = rn.nextInt(10) + 1;
@@ -560,9 +584,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(this, "Ingrese el codigo correcto");
         }
-        
-    }//GEN-LAST:event_eliminarProveedorButtonActionPerformed
-
+    }
+    
     private void fieldBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_fieldBuscarCaretUpdate
         // TODO add your handling code here:
         if(fieldBuscar.getText().equalsIgnoreCase(" ")){
@@ -648,7 +671,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -656,6 +678,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    
+  public void configurarAtajosTeclado() {
+    // Objeto raíz donde capturarás teclas
+    JRootPane rootPane = this.getRootPane();
+
+    // 🔹 Atajo F1 → Abrir nuevo proveedor
+    rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+            .put(KeyStroke.getKeyStroke("F1"), "AbrirNuevoProveedor");
+    rootPane.getActionMap().put("AbrirNuevoProveedor", new AbstractAction() {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+            if(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Proveedores")){
+                agregarProveedor(); // Tu método que abre nuevoProveedor
+            }
+        }
+    });
+
+    // 🔹 Atajo Ctrl + E → Editar proveedor
+    rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+            .put(KeyStroke.getKeyStroke("control E"), "EditarProveedor");
+    rootPane.getActionMap().put("EditarProveedor", new AbstractAction() {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+            if(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Proveedores")){
+                editarProveedor(); // Tu método que abre nuevoProveedor
+            }
+        }
+    });
+    
+    
+}
+ 
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarACatalogo;

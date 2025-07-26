@@ -67,7 +67,7 @@ public class nuevoCatalogo extends javax.swing.JFrame {
         jPanel1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.selection.color1"));
         jPanel1.setForeground(new java.awt.Color(204, 204, 255));
 
-        jPanel2.setBackground(new java.awt.Color(198, 232, 255));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setForeground(javax.swing.UIManager.getDefaults().getColor("Button.darcula.selection.color1"));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -157,8 +157,8 @@ public class nuevoCatalogo extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(198, 232, 255));
-        jPanel3.setForeground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setForeground(new java.awt.Color(204, 204, 204));
 
         guardarProducto.setBackground(new java.awt.Color(51, 51, 255));
         guardarProducto.setForeground(new java.awt.Color(255, 255, 255));
